@@ -1,0 +1,16 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy via Vercel REST API
+        run: |
+          COMMIT_SHA=$(git rev-parse HEAD)
+          curl -s -X POST "https://api.vercel.com/v13/deployments"             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}"             -H "Content-Type: application/json"             -d "{"name":"mobiuk-website","gitSource":{"type":"github","repoId":"1288717572","ref":"main","sha":"\"},"target":"production"}"
