@@ -222,31 +222,40 @@
     .stag{display:inline-flex;align-items:center;gap:.3rem;background:var(--gl);border:1px solid var(--gb);color:#15803D;font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.22rem .65rem;border-radius:100px;margin-top:auto;width:fit-content}
 
     /* ── PROCESS (CSS illustrations only) ── */
+    /* ── PROCESS — clean row-card layout ── */
     #process{background:#fff}
-    .prow{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;position:relative;width:100%}
-    @media(min-width:700px){.prow{grid-template-columns:repeat(4,1fr);gap:0}}
-    @media(max-width:440px){.prow{grid-template-columns:1fr}}
-    .prow::before{content:'';position:absolute;top:28px;left:12.5%;right:12.5%;height:2px;background:var(--gb);z-index:0;display:none}
-    @media(min-width:700px){.prow::before{display:block}}
-    .pstep{text-align:center;padding:0 1rem;position:relative;z-index:1}
-    .pnum{width:56px;height:56px;border-radius:50%;background:#fff;border:2.5px solid var(--g);color:var(--g);font-size:1.1rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:var(--ssm)}
-    .pstep h3{font-size:.95rem;font-weight:700;margin-bottom:.35rem;color:var(--text)}
-    .pstep p{font-size:.82rem;color:var(--mut);line-height:1.6}
-    /* CSS tool showcase instead of photo */
-    .tool-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,45%),1fr));gap:1rem;margin-top:3rem;width:100%}
-    .tool-card{background:var(--off);border:1.5px solid var(--bdr);border-radius:var(--r);padding:1.5rem 1rem;text-align:center;transition:border-color .2s,background .2s}
-    .tool-card:hover{border-color:var(--gb);background:var(--gl)}
-    .tool-icon{font-size:2rem;margin-bottom:.6rem}
-    .tool-label{font-size:.75rem;font-weight:700;color:var(--mut);letter-spacing:.04em}
+    .prow{display:flex;flex-direction:column;gap:1rem;width:100%}
+    @media(min-width:640px){
+      .prow{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;align-items:stretch}
+    }
+    @media(min-width:960px){
+      .prow{grid-template-columns:repeat(4,1fr)}
+    }
+    .pstep{background:var(--off);border:1.5px solid var(--bdr);border-radius:var(--r);padding:1.5rem 1.25rem;display:flex;align-items:flex-start;gap:1rem;transition:border-color .2s,box-shadow .2s;overflow:hidden}
+    @media(min-width:960px){
+      .pstep{flex-direction:column;align-items:flex-start;gap:.85rem;padding:1.75rem 1.5rem}
+    }
+    .pstep:hover{border-color:var(--gb);box-shadow:0 4px 16px rgba(34,197,94,.09)}
+    .pnum{width:46px;height:46px;border-radius:50%;background:#fff;border:2px solid var(--g);color:var(--g);font-size:1.05rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 4px var(--gl)}
+    .pstep-body{flex:1;min-width:0}
+    .pstep-body h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem;line-height:1.3}
+    .pstep-body p{font-size:.82rem;color:var(--mut);line-height:1.65;margin:0}
+    /* Tool chips — pill style, no text cutoff */
+    .tool-row{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:2.5rem;justify-content:center;width:100%}
+    .tool-chip{display:inline-flex;align-items:center;gap:.45rem;background:var(--off);border:1.5px solid var(--bdr);border-radius:100px;padding:.55rem 1rem;font-size:.78rem;font-weight:600;color:var(--mut);white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+    .tool-chip:hover{background:var(--gl);border-color:var(--gb);color:var(--gd)}
+    .tool-chip-icon{font-size:1rem}
 
-    /* ── WHY ── */
+    /* ── WHY — explicit flex column cards ── */
     #why{background:var(--off)}
-    .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:1.25rem;width:100%}
-    .wc{background:#fff;border:1.5px solid var(--bdr);border-radius:var(--r);padding:1.75rem 1.5rem;transition:border-color .2s,box-shadow .2s,transform .2s;min-width:0}
-    .wc:hover{border-color:var(--gb);box-shadow:0 6px 24px rgba(34,197,94,.09);transform:translateY(-2px)}
-    .wiw{width:46px;height:46px;background:var(--gl);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;flex-shrink:0}
-    .wc h3{font-size:.975rem;font-weight:700;margin-bottom:.35rem;color:var(--text)}
-    .wc p{font-size:.85rem;color:var(--mut);line-height:1.65}
+    .wgrid{display:grid;grid-template-columns:1fr;gap:1.25rem;width:100%}
+    @media(min-width:560px){.wgrid{grid-template-columns:1fr 1fr}}
+    @media(min-width:900px){.wgrid{grid-template-columns:repeat(4,1fr)}}
+    .wc{background:#fff;border:1.5px solid var(--bdr);border-radius:var(--r);padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .2s,box-shadow .2s,transform .2s;overflow:hidden;min-width:0}
+    .wc:hover{border-color:var(--gb);box-shadow:0 6px 24px rgba(34,197,94,.1);transform:translateY(-2px)}
+    .wiw{width:48px;height:48px;background:var(--gl);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .wc h3{font-size:1rem;font-weight:700;color:var(--text);line-height:1.3;margin:0}
+    .wc p{font-size:.875rem;color:var(--mut);line-height:1.7;margin:0;flex:1}
 
     /* ── BRANDS ── */
     #brands{background:#fff;padding:64px 0}
@@ -548,37 +557,48 @@
     <span class="lbl rv">How It Works</span>
     <h2 class="st rv" id="process-heading">Getting your device repaired in Accrington is simple.</h2>
     <p class="ss rv">Four easy steps from walk-in to working device. Most repairs are completed the same day at our Accrington store.</p>
+
     <div class="prow">
       <div class="pstep rv">
-        <div class="pnum">1</div>
-        <h3>Walk In or Call</h3>
-        <p>Visit us at 133 Henry Street, Accrington or call 01254 917777. No appointment needed for most repairs.</p>
+        <div class="pnum" aria-hidden="true">1</div>
+        <div class="pstep-body">
+          <h3>Walk In or Call</h3>
+          <p>Visit us at 133 Henry Street, Accrington or call <a href="tel:01254917777" style="color:var(--g);font-weight:600">01254 917777</a>. No appointment needed for most repairs.</p>
+        </div>
       </div>
       <div class="pstep rv d1">
-        <div class="pnum">2</div>
-        <h3>Free Diagnosis</h3>
-        <p>We assess your device and give you a clear, upfront price. No obligation to proceed — ever.</p>
+        <div class="pnum" aria-hidden="true">2</div>
+        <div class="pstep-body">
+          <h3>Free Diagnosis</h3>
+          <p>We assess your device and give you a clear, upfront price. No obligation to proceed — ever.</p>
+        </div>
       </div>
       <div class="pstep rv d2">
-        <div class="pnum">3</div>
-        <h3>Expert Repair</h3>
-        <p>Our experienced Accrington technicians carry out your repair using quality parts. Most jobs done same day.</p>
+        <div class="pnum" aria-hidden="true">3</div>
+        <div class="pstep-body">
+          <h3>Expert Repair</h3>
+          <p>Our Accrington technicians carry out your repair using genuine quality parts. Most jobs are done the same day.</p>
+        </div>
       </div>
       <div class="pstep rv d3">
-        <div class="pnum">4</div>
-        <h3>Collect &amp; Go</h3>
-        <p>Pick up your device fully repaired and tested. We won't give it back until we're completely satisfied with the result.</p>
+        <div class="pnum" aria-hidden="true">4</div>
+        <div class="pstep-body">
+          <h3>Collect &amp; Go</h3>
+          <p>Pick up your device fully repaired and tested. We won't hand it back until we're completely happy with the result.</p>
+        </div>
       </div>
     </div>
 
-    <!-- CSS tool showcase — replaces external photo, always renders -->
-    <div class="tool-row rv" aria-label="Tools and services" aria-hidden="true">
-      <div class="tool-card"><div class="tool-icon">🔩</div><div class="tool-label">Precision Tools</div></div>
-      <div class="tool-card"><div class="tool-icon">📱</div><div class="tool-label">All Phone Models</div></div>
-      <div class="tool-card"><div class="tool-icon">🔋</div><div class="tool-label">Battery Repair</div></div>
-      <div class="tool-card"><div class="tool-icon">🖥️</div><div class="tool-label">Screen Repair</div></div>
-      <div class="tool-card"><div class="tool-icon">💧</div><div class="tool-label">Water Damage</div></div>
-      <div class="tool-card"><div class="tool-icon">⚙️</div><div class="tool-label">Software Fixes</div></div>
+    <!-- Capability chips — always readable, no cutoff -->
+    <div class="tool-row rv" aria-label="What we repair">
+      <span class="tool-chip"><span class="tool-chip-icon">🔩</span>Precision Tools</span>
+      <span class="tool-chip"><span class="tool-chip-icon">📱</span>All Phone Models</span>
+      <span class="tool-chip"><span class="tool-chip-icon">🔋</span>Battery Repair</span>
+      <span class="tool-chip"><span class="tool-chip-icon">🖥️</span>Screen Repair</span>
+      <span class="tool-chip"><span class="tool-chip-icon">💧</span>Water Damage</span>
+      <span class="tool-chip"><span class="tool-chip-icon">⚙️</span>Software Fixes</span>
+      <span class="tool-chip"><span class="tool-chip-icon">💻</span>Laptop Repairs</span>
+      <span class="tool-chip"><span class="tool-chip-icon">🖨️</span>Printing &amp; Copying</span>
     </div>
 
     <div style="text-align:center;margin-top:2.5rem" class="rv">
