@@ -243,9 +243,10 @@
     .ebay-label{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#4ADE80;display:block;margin-bottom:.6rem}
     h2.ebay-title{font-size:clamp(1.75rem,4vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.18;color:#fff;margin:0 0 .75rem 0}
     p.ebay-sub{color:rgba(255,255,255,.6);font-size:1rem;line-height:1.72;margin:0 0 2rem 0}
-    .ebay-perks{display:flex;flex-direction:column;gap:.9rem;margin-bottom:2rem}
-    .ebay-perk{display:flex;align-items:center;gap:.85rem;font-size:.9rem;color:rgba(255,255,255,.8)}
-    .ebay-tick{width:24px;height:24px;min-width:24px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    /* ─ EBAY PERKS — ::before checkmark, no SVG, cannot break ─ */
+    .ebay-perks{list-style:none;padding:0;margin:0 0 2rem 0;display:flex;flex-direction:column;gap:.9rem}
+    .ebay-perk{font-size:.925rem;color:rgba(255,255,255,.85);padding-left:2.25rem;position:relative;line-height:1.55;min-height:24px}
+    .ebay-perk::before{content:'✓';position:absolute;left:0;top:0;width:22px;height:22px;background:#22C55E;border-radius:50%;font-size:.75rem;font-weight:900;color:#fff;text-align:center;line-height:22px}
     /* eBay store card */
     .ebay-card{background:#1a2536;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.75rem;overflow:hidden}
     .ebay-card-hdr{display:flex;align-items:center;gap:.75rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.25rem}
@@ -275,11 +276,12 @@
     .info-row-body a{transition:color .2s;text-decoration:none}
     .info-row-body a:hover{color:var(--g)}
     /* Hours table */
-    .hours-table{width:100%;border-collapse:collapse}
-    .hours-table tr td{font-size:.875rem;padding:.2rem 0;vertical-align:top}
-    .hours-table tr td:first-child{font-weight:600;color:#111827;padding-right:1.5rem;white-space:nowrap}
-    .hours-table tr td:last-child{color:var(--mut)}
-    .hours-table tr.closed td{color:var(--lmut)}
+    .hours-block{display:flex;flex-direction:column;gap:0;margin-top:.25rem}
+    .hour-row{display:flex;align-items:center;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid #E5E7EB;gap:1rem}
+    .hour-row:last-child{border-bottom:none}
+    .hour-day{font-size:.875rem;font-weight:600;color:#111827;white-space:nowrap;flex-shrink:0}
+    .hour-time{font-size:.875rem;color:#6B7280;text-align:right}
+    .hour-closed .hour-day,.hour-closed .hour-time{color:#9CA3AF}
     /* Action buttons */
     .find-actions{display:flex;gap:.85rem;margin-top:1.5rem;flex-wrap:wrap}
     /* Map card */
@@ -363,10 +365,10 @@
   </a>
   <ul class="nl">
     <li><a href="#services">Services</a></li>
-    <li><a href="#process">Repairs</a></li>
+    <li><a href="/repairs">Repairs</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#find">Find Us</a></li>
+    <li><a href="/contact">Contact</a></li>
     <li><a href="https://ebay.io/m/he4oQi" target="_blank" rel="noopener noreferrer" class="nav-eb">🛒 Shop on eBay</a></li>
   </ul>
   <button class="burger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
@@ -716,24 +718,12 @@
         <span class="ebay-label">Online Store</span>
         <h2 class="ebay-title" id="ebay-h">Can't make it to Accrington?<br>Shop mobiUK on eBay.</h2>
         <p class="ebay-sub">Browse our full range of phones, accessories and tech with fast UK tracked delivery and full eBay buyer protection on every order.</p>
-        <div class="ebay-perks">
-          <div class="ebay-perk">
-            <div class="ebay-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span>Fast UK tracked delivery nationwide</span>
-          </div>
-          <div class="ebay-perk">
-            <div class="ebay-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span>eBay Money Back Guarantee on every order</span>
-          </div>
-          <div class="ebay-perk">
-            <div class="ebay-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span>Secure checkout — PayPal, card &amp; more</span>
-          </div>
-          <div class="ebay-perk">
-            <div class="ebay-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span>Same trusted mobiUK Accrington team</span>
-          </div>
-        </div>
+        <ul class="ebay-perks">
+          <li class="ebay-perk">Fast UK tracked delivery nationwide</li>
+          <li class="ebay-perk">eBay Money Back Guarantee on every order</li>
+          <li class="ebay-perk">Secure checkout — PayPal, card &amp; more</li>
+          <li class="ebay-perk">Same trusted mobiUK Accrington team behind every listing</li>
+        </ul>
         <a href="https://ebay.io/m/he4oQi" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-lg">🛒 Visit Our eBay Store</a>
       </div>
       <div class="rv d2">
@@ -801,11 +791,11 @@
             <span class="info-ico">🕐</span>
             <div class="info-row-body">
               <h4>Opening Hours</h4>
-              <table class="hours-table">
-                <tr><td>Mon – Fri</td><td>9:00am – 6:00pm</td></tr>
-                <tr><td>Saturday</td><td>9:00am – 5:00pm</td></tr>
-                <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
-              </table>
+              <div class="hours-block">
+                <div class="hour-row"><span class="hour-day">Mon – Fri</span><span class="hour-time">9:00am – 6:00pm</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span class="hour-time">9:00am – 5:00pm</span></div>
+                <div class="hour-row hour-closed"><span class="hour-day">Sunday</span><span class="hour-time">Closed</span></div>
+              </div>
             </div>
           </div>
         </div>
